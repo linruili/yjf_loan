@@ -2,9 +2,9 @@ import pandas as pd
 import numpy as np
 import datetime
 
-overdue_day=3
+overdue_day=5
 
-def f(arr):
+def f1(arr):
     #日期最大最小值相差超过overdue_day的，返回1
     arr = arr.apply(lambda x:datetime.datetime.strptime(x, "%Y-%m-%d %H:%M:%S"))
     days = (arr.max() - arr.min()).days
@@ -34,7 +34,7 @@ contract_num = pd.DataFrame({contract_num.index.name:contract_num.index, 'contra
 
 
 
-overdue = auto['withhold_send_time'].groupby(auto['order_no']).agg(f)
+overdue = auto['withhold_send_time'].groupby(auto['order_no']).agg(f1)
 #convert Series to DataFrame.  columns=[order_no ,order_isOverdue]
 overdue = pd.DataFrame({overdue.index.name:overdue.index, 'order_isOverdue':overdue.data}, index=range(len(overdue)))
 
