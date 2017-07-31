@@ -42,6 +42,7 @@ all = xlsx_File.parse('Sheet1')
 
 all = all.drop(['installment_repay_type','order_period','total_times','order_amount','memo'], axis=1)
 all = all.dropna(how='any')
+all = all.reset_index(drop=True)
 
 
 contract_isOverdue = all.groupby('customer_contract_no').apply(f5)
